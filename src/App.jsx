@@ -17,14 +17,15 @@ import HistoryDrawer from "./components/common/HistoryDrawer";
 import NotificationCenter from "./components/common/NotificationCenter";
 import SettingsModal from "./components/common/SettingsModal";
 import AIAssistantWidget from "./components/common/AIAssistantWidget";
+import LandingPage from "./components/common/LandingPage";
 
 import { calculateRiskScore } from "./services/riskEngine";
 import { runAIAllocation, calculateBaselineVsAIMetrics } from "./services/allocationEngine";
 import { storageService } from "./services/storageService";
 
 export default function App() {
-  // Main Top Bar Navigation View (CONTROL_ROOM, CITIZEN, ANALYTICS, DEPLOYMENT, INCIDENT_LOGS)
-  const [viewMode, setViewMode] = useState(storageService.getViewMode() || "CONTROL_ROOM");
+  // Main Top Bar Navigation View (LANDING, CONTROL_ROOM, CITIZEN, ANALYTICS, DEPLOYMENT, INCIDENT_LOGS)
+  const [viewMode, setViewMode] = useState("LANDING");
   // Left Sidebar Sub-View (MAP_OVERVIEW, INCIDENT_LOGS, RISK_HEATMAP, RESOURCE_HUB, SIMULATION)
   const [activeSubView, setActiveSubView] = useState("MAP_OVERVIEW");
 
@@ -32,7 +33,7 @@ export default function App() {
   const [useAIPlan, setUseAIPlan] = useState(true);
 
   // Theme & Settings Preferences State
-  const [theme, setTheme] = useState(localStorage.getItem("nagpur_theme") || "dark");
+  const [theme, setTheme] = useState(localStorage.getItem("nagpur_theme") || "light");
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [autoRefreshSec, setAutoRefreshSec] = useState(15);
 
@@ -206,11 +207,12 @@ export default function App() {
       height: "100vh",
       display: "flex",
       flexDirection: "column",
-      background: "var(--bg-main)",
+      background: "url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&q=80') center/cover",
       overflow: "hidden"
     }} className={isCommandRoomBg ? "command-room-bg" : ""}>
       {/* Top Navigation Bar */}
-      <Navbar
+      {viewMode !== "LANDING" && (
+        <Navbar
         viewMode={viewMode}
         setViewMode={(mode) => {
           setViewMode(mode);
@@ -232,9 +234,12 @@ export default function App() {
         onOpenSettings={() => setIsSettingsOpen(true)}
         onOpenIncidentLogs={handleOpenIncidentLogs}
       />
+      )}
 
       {/* Main Body View Switching */}
-      {viewMode === "CITIZEN" ? (
+      {viewMode === "LANDING" ? (
+        <LandingPage setViewMode={setViewMode} />
+      ) : viewMode === "CITIZEN" ? (
         <CitizenHome
           junctions={junctions}
           complaints={complaints}
@@ -272,6 +277,7 @@ export default function App() {
           <CommandSidebar
             activeSubView={activeSubView}
             setActiveSubView={setActiveSubView}
+            setViewMode={setViewMode}
             onOpenDispatchModal={() => handleTriggerIncident("j1")}
             onOpenSystemStatusModal={() => setIsHistoryOpen(true)}
           />
@@ -412,12 +418,14 @@ export default function App() {
       />
 
       {/* Floating AI Assistant Widget ("Nagpur Traffic AI Mitr") */}
-      <AIAssistantWidget
+      {viewMode !== "LANDING" && (
+        <AIAssistantWidget
         junctionsWithRisk={junctionsWithRisk}
         officers={officers}
         complaints={complaints}
         currentLang={currentLang}
       />
+      )}
     </div>
   );
 }

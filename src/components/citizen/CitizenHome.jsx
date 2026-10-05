@@ -27,7 +27,7 @@ export default function CitizenHome({ junctions, complaints, currentLang, onSele
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      background: "var(--bg-main)",
+      background: "linear-gradient(135deg, rgba(20, 184, 166, 0.85) 0%, rgba(30, 58, 138, 0.95) 100%), url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&q=80') center/cover",
       padding: "1rem"
     }}>
       {/* Mobile Device Container Mockup */}

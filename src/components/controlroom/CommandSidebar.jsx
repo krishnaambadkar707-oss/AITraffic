@@ -4,14 +4,13 @@ import { Map, AlertOctagon, Flame, Users, Zap, Siren, Radio } from "lucide-react
 export default function CommandSidebar({
   activeSubView,
   setActiveSubView,
+  setViewMode,
   onOpenDispatchModal,
   onOpenSystemStatusModal
 }) {
   const menuItems = [
     { id: "MAP_OVERVIEW", label: "MAP OVERVIEW", icon: Map },
-    { id: "INCIDENT_LOGS", label: "INCIDENT LOGS", icon: AlertOctagon },
     { id: "RISK_HEATMAP", label: "RISK HEATMAP", icon: Flame },
-    { id: "RESOURCE_HUB", label: "RESOURCE HUB", icon: Users },
     { id: "SIMULATION", label: "SIMULATION", icon: Zap }
   ];
 
@@ -19,16 +18,24 @@ export default function CommandSidebar({
     <aside style={{
       width: "250px",
       height: "100%",
-      background: "var(--bg-panel)",
-      backdropFilter: "var(--backdrop-blur)",
-      WebkitBackdropFilter: "var(--backdrop-blur)",
-      borderRight: "1px solid var(--border-color)",
+      background: "linear-gradient(180deg, rgba(15, 23, 42, 0.85) 0%, rgba(2, 6, 23, 0.95) 100%)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      borderRight: "1px solid rgba(45, 212, 191, 0.3)",
       display: "flex",
       flexDirection: "column",
       justifyContent: "space-between",
       padding: "1rem 0.85rem",
       zIndex: 950,
-      boxShadow: "4px 0 24px rgba(0, 0, 0, 0.15)"
+      boxShadow: "4px 0 40px rgba(13, 148, 136, 0.2)",
+      "--text-primary": "#F8FAFC",
+      "--text-secondary": "#94A3B8",
+      "--text-muted": "#64748B",
+      "--border-color": "rgba(45, 212, 191, 0.3)",
+      "--bg-panel": "rgba(15, 23, 42, 0.6)",
+      "--accent-cyan": "#2DD4BF",
+      "--accent-cyan-bg": "rgba(45, 212, 191, 0.15)",
+      "--bg-card": "rgba(2, 6, 23, 0.6)"
     }}>
       {/* Top Header */}
       <div>
@@ -37,7 +44,7 @@ export default function CommandSidebar({
           marginBottom: "1rem",
           borderBottom: "1px solid var(--border-color)"
         }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
             <h2 style={{
               fontSize: "1.25rem",
               fontWeight: "900",
@@ -65,6 +72,31 @@ export default function CommandSidebar({
               V2.0 Active
             </span>
           </div>
+
+          <button
+            onClick={() => setViewMode && setViewMode("LANDING")}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              gap: "0.65rem",
+              padding: "0.65rem 0.85rem",
+              borderRadius: "6px",
+              border: "1px solid var(--accent-cyan)",
+              background: "var(--accent-cyan-bg)",
+              color: "var(--accent-cyan)",
+              fontFamily: "var(--font-heading)",
+              fontSize: "0.85rem",
+              fontWeight: "800",
+              letterSpacing: "0.04em",
+              cursor: "pointer",
+              textAlign: "left",
+              transition: "all 0.18s ease"
+            }}
+          >
+            <span style={{ display: "inline-block", fontSize: "16px" }}>🏠</span>
+            <span>BACK TO HOME</span>
+          </button>
         </div>
 
         {/* Navigation Items */}

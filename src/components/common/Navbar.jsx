@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Monitor, Smartphone, BarChart3, Users, AlertOctagon, AlertTriangle, Settings, User, Image, Sun, Moon } from "lucide-react";
+import { Home, Shield, Monitor, Smartphone, BarChart3, Users, AlertOctagon, AlertTriangle, Settings, User, Image, Sun, Moon } from "lucide-react";
 import NotificationCenter from "./NotificationCenter";
 
 export default function Navbar({
@@ -36,7 +36,12 @@ export default function Navbar({
       boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)"
     }}>
       {/* Left Branding Logo */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+      <div 
+        onClick={() => setViewMode("LANDING")}
+        style={{ display: "flex", alignItems: "center", gap: "0.85rem", cursor: "pointer", transition: "opacity 0.2s" }}
+        onMouseOver={e => e.currentTarget.style.opacity = "0.8"}
+        onMouseOut={e => e.currentTarget.style.opacity = "1"}
+      >
         <div style={{
           width: "40px",
           height: "40px",
@@ -75,130 +80,40 @@ export default function Navbar({
       </div>
 
       {/* Center Main Navigation Tabs */}
-      <nav style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "0.4rem",
-        background: "var(--bg-card)",
-        padding: "4px",
-        borderRadius: "8px",
-        border: "1px solid var(--border-color)"
-      }}>
-        <button
-          onClick={() => setViewMode("CONTROL_ROOM")}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: viewMode === "CONTROL_ROOM" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
-            background: viewMode === "CONTROL_ROOM" ? "var(--accent-cyan-bg)" : "transparent",
-            color: viewMode === "CONTROL_ROOM" ? "var(--accent-cyan)" : "var(--text-secondary)",
-            fontFamily: "var(--font-heading)",
-            fontWeight: "700",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            letterSpacing: "0.04em"
-          }}
-        >
-          <Monitor style={{ width: "15px", height: "15px" }} />
-          CONTROL ROOM
-        </button>
-
-        <button
-          onClick={onOpenIncidentLogs}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: viewMode === "INCIDENT_LOGS" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
-            background: viewMode === "INCIDENT_LOGS" ? "var(--accent-cyan-bg)" : "transparent",
-            color: viewMode === "INCIDENT_LOGS" ? "var(--accent-cyan)" : "var(--text-secondary)",
-            fontFamily: "var(--font-heading)",
-            fontWeight: "700",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            letterSpacing: "0.04em"
-          }}
-        >
-          <AlertOctagon style={{ width: "15px", height: "15px" }} />
-          INCIDENT LOGS
-        </button>
-
-        <button
-          onClick={() => setViewMode("CITIZEN")}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: viewMode === "CITIZEN" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
-            background: viewMode === "CITIZEN" ? "var(--accent-cyan-bg)" : "transparent",
-            color: viewMode === "CITIZEN" ? "var(--accent-cyan)" : "var(--text-secondary)",
-            fontFamily: "var(--font-heading)",
-            fontWeight: "700",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            letterSpacing: "0.04em"
-          }}
-        >
-          <Smartphone style={{ width: "15px", height: "15px" }} />
-          CITIZEN REPORTING
-        </button>
-
-        <button
-          onClick={() => setViewMode("ANALYTICS")}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: viewMode === "ANALYTICS" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
-            background: viewMode === "ANALYTICS" ? "var(--accent-cyan-bg)" : "transparent",
-            color: viewMode === "ANALYTICS" ? "var(--accent-cyan)" : "var(--text-secondary)",
-            fontFamily: "var(--font-heading)",
-            fontWeight: "700",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            letterSpacing: "0.04em"
-          }}
-        >
-          <BarChart3 style={{ width: "15px", height: "15px" }} />
-          ANALYTICS
-        </button>
-
-        <button
-          onClick={() => setViewMode("DEPLOYMENT")}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.45rem 0.85rem",
-            borderRadius: "6px",
-            border: viewMode === "DEPLOYMENT" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
-            background: viewMode === "DEPLOYMENT" ? "var(--accent-cyan-bg)" : "transparent",
-            color: viewMode === "DEPLOYMENT" ? "var(--accent-cyan)" : "var(--text-secondary)",
-            fontFamily: "var(--font-heading)",
-            fontWeight: "700",
-            fontSize: "0.85rem",
-            cursor: "pointer",
-            transition: "all 0.15s ease",
-            letterSpacing: "0.04em"
-          }}
-        >
-          <Users style={{ width: "15px", height: "15px" }} />
-          DEPLOYMENT
-        </button>
-      </nav>
+      {viewMode !== "CONTROL_ROOM" && (
+        <nav style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.4rem",
+          background: "var(--bg-card)",
+          padding: "4px",
+          borderRadius: "8px",
+          border: "1px solid var(--border-color)"
+        }}>
+          <button
+            onClick={() => setViewMode("LANDING")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.45rem",
+              padding: "0.45rem 0.85rem",
+              borderRadius: "6px",
+              border: viewMode === "LANDING" ? "1px solid var(--accent-cyan)" : "1px solid transparent",
+              background: viewMode === "LANDING" ? "var(--accent-cyan-bg)" : "transparent",
+              color: viewMode === "LANDING" ? "var(--accent-cyan)" : "var(--text-secondary)",
+              fontFamily: "var(--font-heading)",
+              fontWeight: "700",
+              fontSize: "0.85rem",
+              cursor: "pointer",
+              transition: "all 0.15s ease",
+              letterSpacing: "0.04em"
+            }}
+          >
+            <Home style={{ width: "15px", height: "15px" }} />
+            HOME
+          </button>
+        </nav>
+      )}
 
       {/* Right Header Status Pills & Controls */}
       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>

@@ -13,7 +13,13 @@ export default function DashboardHeader({ metrics, activeZone, simulatedIncident
       display: "flex",
       alignItems: "center",
       gap: "1rem",
-      pointerEvents: "auto"
+      pointerEvents: "auto",
+      "--text-primary": "#F8FAFC",
+      "--text-secondary": "#94A3B8",
+      "--bg-panel": "rgba(15, 23, 42, 0.75)",
+      "--border-color": "rgba(45, 212, 191, 0.3)",
+      "--accent-cyan": "#2DD4BF",
+      "--accent-cyan-bg": "rgba(45, 212, 191, 0.15)"
     }}>
       {/* Card 1: AI COVERAGE RATE */}
       <div className="glass-panel" style={{

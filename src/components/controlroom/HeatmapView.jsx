@@ -180,7 +180,17 @@ export default function HeatmapView({
   };
 
   return (
-    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+    <div style={{ 
+      width: "100%", 
+      height: "100%", 
+      position: "relative",
+      "--text-primary": "#F8FAFC",
+      "--text-secondary": "#CBD5E1",
+      "--text-muted": "#94A3B8",
+      "--bg-panel": "rgba(15, 23, 42, 0.8)",
+      "--border-color": "rgba(45, 212, 191, 0.4)",
+      "--accent-cyan": "#2DD4BF"
+    }}>
       <MapContainer
         center={centerNagpur}
         zoom={13}

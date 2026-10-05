@@ -10,11 +10,18 @@ export default function AnalyticsView({ metrics, junctionsWithRisk, aiAssignment
       height: "100%",
       padding: "1.5rem",
       overflowY: "auto",
-      background: "var(--bg-main)",
+      background: "linear-gradient(135deg, rgba(20, 184, 166, 0.85) 0%, rgba(30, 58, 138, 0.95) 100%), url('https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&q=80') center/cover",
       color: "var(--text-primary)",
       display: "flex",
       flexDirection: "column",
-      gap: "1.25rem"
+      gap: "1.25rem",
+      "--text-primary": "#F8FAFC",
+      "--text-secondary": "#CBD5E1",
+      "--text-muted": "#94A3B8",
+      "--bg-panel": "rgba(15, 23, 42, 0.4)",
+      "--bg-card": "rgba(2, 6, 23, 0.5)",
+      "--border-color": "rgba(45, 212, 191, 0.3)",
+      "--bg-hover": "rgba(15, 23, 42, 0.6)"
     }}>
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.75rem" }}>
